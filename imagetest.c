@@ -1,4 +1,6 @@
 // Sam Siewert
+//
+// Example of image processing test driver, 10/27/14
 
 #include <stdio.h>
 #include <stdlib.h>
