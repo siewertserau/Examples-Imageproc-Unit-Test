@@ -17,6 +17,11 @@ void main(int argc, char *argv[])
   int bufflen, hdrlen; unsigned row=0, col=0, chan=0, pix; int i, j, k;
   double alpha=1.25;  unsigned char beta=25;
 
+  if(argc < 2)
+  {
+      printf("Use: brighten inputfile\n");
+      exit(-1);
+  }
 
   // TEST CASE #0
   //

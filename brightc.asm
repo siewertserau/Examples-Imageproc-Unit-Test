@@ -3,20 +3,20 @@
 	.comm	i,4,4
 	.comm	j,4,4
 	.comm	k,4,4
-.globl row
+	.globl	row
 	.data
 	.align 4
 	.type	row, @object
 	.size	row, 4
 row:
 	.long	480
-.globl col
+	.globl	col
 	.align 4
 	.type	col, @object
 	.size	col, 4
 col:
 	.long	640
-.globl chan
+	.globl	chan
 	.align 4
 	.type	chan, @object
 	.size	chan, 4
@@ -24,20 +24,20 @@ chan:
 	.long	3
 	.comm	img,921600,32
 	.comm	newimg,921600,32
-.globl alpha
+	.globl	alpha
 	.align 8
 	.type	alpha, @object
 	.size	alpha, 8
 alpha:
 	.long	0
 	.long	1072955392
-.globl beta
+	.globl	beta
 	.type	beta, @object
 	.size	beta, 1
 beta:
 	.byte	25
 	.text
-.globl brighten
+	.globl	brighten
 	.type	brighten, @function
 brighten:
 .LFB0:
@@ -73,7 +73,7 @@ brighten:
 	movl	chan(%rip), %eax
 	imull	%eax, %edx
 	movl	k(%rip), %eax
-	leal	(%rdx,%rax), %eax
+	addl	%edx, %eax
 	cltq
 	movzbl	img(%rax), %eax
 	movzbl	%al, %eax
@@ -84,7 +84,7 @@ brighten:
 	movl	%eax, %edx
 	movzbl	beta(%rip), %eax
 	movzbl	%al, %eax
-	leal	(%rdx,%rax), %eax
+	addl	%edx, %eax
 	movl	%eax, pix(%rip)
 	movl	pix(%rip), %eax
 	cmpl	$255, %eax
@@ -120,11 +120,11 @@ brighten:
 	movl	row(%rip), %eax
 	cmpl	%eax, %edx
 	jl	.L9
-	leave
+	popq	%rbp
 	.cfi_def_cfa 7, 8
 	ret
 	.cfi_endproc
 .LFE0:
 	.size	brighten, .-brighten
-	.ident	"GCC: (GNU) 4.4.7 20120313 (Red Hat 4.4.7-4)"
+	.ident	"GCC: (Ubuntu 4.8.4-2ubuntu1~14.04.1) 4.8.4"
 	.section	.note.GNU-stack,"",@progbits

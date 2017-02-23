@@ -62,7 +62,7 @@ void readppm(unsigned char *buffer, int *bufferlen,
     } while(toread > 0 && (!feof(filep)));
 
     printf("readppm done\n\n");
-    close(filep);
+    fclose(filep);
 }
 
 
@@ -109,7 +109,7 @@ void writeppm(unsigned char *buffer, int bufferlen,
         printf("wrote %d bytes, buffer=%p, towrite=%d\n", nwritten, buffer, towrite);
     } while(towrite > 0);
 
-    close(filep);
+    fclose(filep);
 }
 
 
